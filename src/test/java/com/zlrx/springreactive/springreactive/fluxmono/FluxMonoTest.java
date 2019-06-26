@@ -2,6 +2,7 @@ package com.zlrx.springreactive.springreactive.fluxmono;
 
 import org.junit.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 public class FluxMonoTest {
@@ -28,7 +29,6 @@ public class FluxMonoTest {
                 .expectNext("Two")
                 .expectNext("Three")
                 .verifyComplete();
-
     }
 
     @Test
@@ -41,7 +41,44 @@ public class FluxMonoTest {
                 .expectNext("One")
                 .expectNext("Two")
                 .expectNext("Three")
+                // .verifyErrorMessage("Test exception")
                 .verifyError(RuntimeException.class);
-
     }
+
+    @Test
+    public void fluxTestSomeElements() {
+        var stringFlux = Flux.just("One", "Two", "Three")
+                .log();
+
+        StepVerifier.create(stringFlux)
+                .expectNextCount(2)
+                .expectNext("Three")
+                .verifyComplete();
+    }
+
+    @Test
+    public void fluxTestWithError() {
+        var stringFlux = Flux.just("One", "Two", "Three")
+                .concatWith(Flux.error(new RuntimeException("Test exception")))
+                .log();
+
+        StepVerifier.create(stringFlux)
+                .expectNext("One", "Two", "Three")
+                .verifyError(RuntimeException.class);
+    }
+
+    @Test
+    public void monoTest() {
+        var stringMono = Mono.just("One").log();
+        StepVerifier.create(stringMono)
+                .expectNext("One")
+                .verifyComplete();
+    }
+
+    @Test
+    public void monoTestError() {
+        StepVerifier.create(Mono.error(new RuntimeException("Mono error")).log())
+                .verifyError(RuntimeException.class);
+    }
+
 }
