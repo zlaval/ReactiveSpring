@@ -15,14 +15,11 @@ public class FluxMonoFactoryTest {
 
     @Test
     public void fluxFromIterable() {
-
         var numberFlux = Flux.fromIterable(numbers).log();
-
         StepVerifier.create(numberFlux)
                 .expectNextCount(3)
                 .expectNext("Four")
                 .verifyComplete();
-
     }
 
     @Test
@@ -32,7 +29,6 @@ public class FluxMonoFactoryTest {
         StepVerifier.create(stringFlux)
                 .expectNext("One", "Two", "Three", "Four")
                 .verifyComplete();
-
     }
 
     @Test
@@ -42,7 +38,6 @@ public class FluxMonoFactoryTest {
         StepVerifier.create(stringFlux)
                 .expectNext("One", "Two", "Three", "Four")
                 .verifyComplete();
-
     }
 
     @Test
@@ -51,7 +46,6 @@ public class FluxMonoFactoryTest {
         StepVerifier.create(range)
                 .expectNextCount(10)
                 .verifyComplete();
-
     }
 
     @Test
@@ -63,7 +57,6 @@ public class FluxMonoFactoryTest {
                 Mono.fromSupplier(() -> "One").log())
                 .expectNext("One")
                 .verifyComplete();
-
     }
 
 }
