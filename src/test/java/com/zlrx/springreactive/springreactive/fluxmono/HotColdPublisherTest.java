@@ -5,7 +5,7 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
-public class HotColtPublisherTest {
+public class HotColdPublisherTest {
 
 
     @Test

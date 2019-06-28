@@ -3,6 +3,7 @@ package com.zlrx.springreactive.springreactive.fluxmono;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
+import reactor.test.scheduler.VirtualTimeScheduler;
 
 import java.time.Duration;
 
@@ -43,17 +44,16 @@ public class FluxCombineTest {
 
     @Test
     public void combineWithConcatDelayed() {
+        VirtualTimeScheduler.getOrSet();
         var abc = Flux.just("A", "B", "C").delayElements(Duration.ofSeconds(1));
-        ;
         var def = Flux.just("D", "E", "F").delayElements(Duration.ofSeconds(1));
-        ;
         var merged = Flux.concat(abc, def).log();
-        StepVerifier.create(merged)
+        StepVerifier.withVirtualTime(() -> merged)
                 .expectSubscription()
+                .thenAwait(Duration.ofSeconds(6))
                 .expectNext("A", "B", "C", "D", "E", "F")
                 .verifyComplete();
     }
-
 
     @Test
     public void combineWithZip() {
