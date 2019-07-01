@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
@@ -17,6 +18,7 @@ import java.util.List;
 @DataMongoTest
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
+@DirtiesContext
 public class ItemRepositoryTest {
 
     @Autowired
@@ -100,6 +102,11 @@ public class ItemRepositoryTest {
 
         StepVerifier.create(deletedItem)
                 .expectSubscription()
+                .verifyComplete();
+
+        StepVerifier.create(itemRepository.findAll().log("The new Item List: "))
+                .expectSubscription()
+                .expectNextCount(3)
                 .verifyComplete();
     }
 

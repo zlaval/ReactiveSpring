@@ -25,3 +25,6 @@ spring:
       host: 192.168.99.100
       port: 27017
       database: prod
+---
+spring:
+  profiles: test

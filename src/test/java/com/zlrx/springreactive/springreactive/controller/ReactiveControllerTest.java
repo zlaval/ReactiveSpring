@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.test.StepVerifier;
@@ -15,8 +16,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-@WebFluxTest
+@WebFluxTest(value = ReactiveController.class)
 @RunWith(SpringRunner.class)
+@DirtiesContext
 public class ReactiveControllerTest {
 
     @Autowired
@@ -46,7 +48,7 @@ public class ReactiveControllerTest {
                 .accept(MediaType.APPLICATION_STREAM_JSON)
                 .exchange()
                 .expectStatus().isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_STREAM_JSON)
+                .expectHeader().contentType(MediaType.APPLICATION_STREAM_JSON_VALUE + ";charset=UTF-8")
                 .expectBodyList(Integer.class)
                 .hasSize(4);
     }

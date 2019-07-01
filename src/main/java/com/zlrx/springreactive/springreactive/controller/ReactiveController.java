@@ -15,8 +15,8 @@ public class ReactiveController {
 
     @GetMapping(value = "/numbers", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<Integer> getNumbers() {
-        return Flux.range(0, 4)
-                .delayElements(Duration.ofSeconds(1));
+        return Flux.range(0, 4);
+        // .delayElements(Duration.ofSeconds(1));
     }
 
     @GetMapping(value = "/infinite-numbers", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)

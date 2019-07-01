@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Data
 @Document
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item {
+public class Item implements Serializable {
 
     @Id
     private String id;
