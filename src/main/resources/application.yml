@@ -1,1 +1,27 @@
-
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+  data:
+    mongodb:
+      host: 192.168.99.100
+      port: 27017
+      database: local
+---
+spring:
+  profiles: uat
+  data:
+    mongodb:
+      host: 192.168.99.100
+      port: 27017
+      database: uat
+---
+spring:
+  profiles: prod
+  data:
+    mongodb:
+      host: 192.168.99.100
+      port: 27017
+      database: prod
