@@ -158,4 +158,14 @@ public class ItemControllerTest {
                 .expectStatus().isNotFound();
     }
 
+    @Test
+    public void exceptionHandlerTest() {
+        webTestClient.get()
+                .uri("/api/v1/item/runtime-exception")
+                .exchange()
+                .expectStatus().is5xxServerError()
+                .expectBody(String.class)
+                .isEqualTo("Something went wrong");
+    }
+
 }
