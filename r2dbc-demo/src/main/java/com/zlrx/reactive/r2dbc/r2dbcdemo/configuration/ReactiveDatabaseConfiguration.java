@@ -16,8 +16,7 @@ public class ReactiveDatabaseConfiguration extends AbstractR2dbcConfiguration {
     public ConnectionFactory connectionFactory() {
         return new H2ConnectionFactory(
                 H2ConnectionConfiguration.builder()
-                        .username("sa")
-                        .inMemory("reactive")
+                        .url("tcp://localhost:1521/default")
                         .build()
         );
     }
