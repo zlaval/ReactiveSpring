@@ -1,6 +1,3 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-    }
-}
 rootProject.name = 'spring-reactive'
+include 'webflux-demo'
+include 'r2dbc-demo'
