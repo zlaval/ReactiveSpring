@@ -33,7 +33,7 @@ public class PersonController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Person> createPerson(@RequestBody Person person) {
         return personRepository.save(person);
     }

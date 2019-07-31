@@ -3,7 +3,6 @@ buildscript {
         springBootVersion = '2.2.0.M4'
     }
     repositories {
-        mavenLocal()
         mavenCentral()
         maven { url "https://repo.spring.io/milestone" }
         maven { url "https://repo.spring.io/snapshot" }
@@ -18,7 +17,6 @@ allprojects {
     apply plugin: 'io.spring.dependency-management'
 
     repositories {
-        mavenLocal()
         mavenCentral()
         maven { url "https://repo.spring.io/milestone" }
         maven { url "https://repo.spring.io/snapshot" }
